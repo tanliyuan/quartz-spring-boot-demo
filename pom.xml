@@ -37,17 +37,16 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.4.1208</version>
-            <scope>runtime</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.flywaydb</groupId>-->
+            <!--<artifactId>flyway-core</artifactId>-->
+        <!--</dependency>-->
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
@@ -58,5 +57,46 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>4.2.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>6.0.6</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://rm-uf642454e7sqyc2v0o.mysql.rds.aliyuncs.com/job_quartz</url>
+                    <user>root</user>
+                    <password>Tanliyuan123</password>
+
+                    <!-- 设置接受flyway进行版本管理的数据库，多个数据库以逗号分隔 -->
+                    <schemas>job_quartz</schemas>
+                    <!-- 设置存放flyway metadata数据的表名 -->
+                    <table>schema_version</table>
+                    <!-- 设置flyway扫描sql升级脚本、java升级脚本的目录路径或包路径 -->
+                    <!--<locations>-->
+                        <!--<location>db/migration</location>-->
+                        <!--&lt;!&ndash;<location>com.kedacom.flywaydemo.migrations</location>&ndash;&gt;-->
+                    <!--</locations>-->
+                    <!-- 设置sql脚本文件的编码 -->
+                    <encoding>UTF-8</encoding>
+                    <!-- 设置执行migrate操作之前的validation行为 -->
+                    <!--<validationMode>ALL</validationMode>-->
+                    <!--&lt;!&ndash; 设置当validation失败时的系统行为 &ndash;&gt;-->
+                    <!--<validationErrorMode>FAIL</validationErrorMode>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

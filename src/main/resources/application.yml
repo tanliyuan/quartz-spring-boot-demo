@@ -1,8 +1,8 @@
 spring:
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://127.0.0.1/test
-    username: postgres
-    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://rm-uf642454e7sqyc2v0o.mysql.rds.aliyuncs.com/job_quartz
+    username: root
+    password: Tanliyuan123
 server:
   port: 8082
